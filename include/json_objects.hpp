@@ -78,6 +78,9 @@ public:
     JsonObjectView( const char* key, const char* value );
     JsonObjectView( const char* keyvalue_pair );
 
+    JsonObjectView* operator[]( const char* key );
+    const JsonObjectView* operator[]( const char* key ) const;
+
     const std::string toString( const unsigned int base_indent = 0 ) const;
 
     std::string key() const;

@@ -8,7 +8,6 @@ The library allows to read and write files in JavaScriptObjectNotation (`*.json`
 It is possible to serialize the values into the standard C/C++ types and even customly developed types or classes via inheritance.
 
 ###### TODO: documentation
-###### TODO: value path extension
 ###### TODO: library types operator native c++ type
 ###### TODO: value reference extension
 
@@ -45,7 +44,8 @@ using namespace jsoncpp;
 Json json = *JsonDocument::fromFile("ddml.json");
 // Get the value ddml
 JsonObjectView& ddml = json["ddml"];
-// Add a fourth variable (NOTE: The key/value-path extension is on the way, you need to use `operator[]` per value before.)
+// Add a fourth variable
+// (To use the key/value-path extension you need to use `operator[]`)
 ddml["varname4"] << new JsonObjectView( "varname4", "{}" );
 ddml["varname4.sql"] << "SELECT * FROM table2 WHERE wordset = varname3;";
 ddml["varname4.dstruct"] << "TableExampleUserElement";

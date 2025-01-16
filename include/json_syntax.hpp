@@ -12,12 +12,18 @@
 
 
 namespace jsoncpp {
+
+JsonObjectView* findByKeyPath( const char* key_path, JsonObjectView* jsonobj );
+JsonObjectView* findByKeyPath( const char* key_path, JsonListView* jsonlist );
+JsonObjectView* findByKeyPath( const char* key_path, Json* json );
+
 namespace regex {
 
 make_regex(jsonstr)             "\"[\s\w\d]\"";
 make_regex(jsondelim)           "\:\ ";
 make_regex(jsonobj)             "\{\n[\w\s\d\:\"\n]+\n\}";
 make_regex(jsonkv)              jsonstr + "\n?" + jsondelim + jsonstr + ",\n";
+
 
 } // namespace regex
 namespace syntax {

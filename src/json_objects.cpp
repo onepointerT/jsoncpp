@@ -21,26 +21,22 @@ JsonObjectView* JsonListView::findKey( const char* key ) const {
 }
 
 JsonObjectView& JsonListView::findKeyRef( const char* key ) {
-    JsonObjectView* jov = findKey( key );
-    if ( jov == nullptr ) {
-        jov = new JsonObjectView( JsonValue( key, "" ) );
-        push_back( jov );
+
+    for ( JsonObjectView* obj : *this ) {
+        if ( obj->key().compare(key) == 0 ) return *obj;
     }
+
+    JsonObjectView* jov = new JsonObjectView( key, "" );
+    push_back( jov );
     return *jov;
 }
 
 JsonObjectView* JsonListView::operator[]( const char* key ) {
-    for ( JsonObjectView* obj : *this ) {
-        if ( obj->key().compare(key) == 0 ) return obj;
-    }
-    return nullptr;
+    return findByKeyPath( key, this );
 }
 
 const JsonObjectView* JsonListView::operator[]( const char* key ) const {
-    for ( JsonObjectView* obj : *this ) {
-        if ( obj->key().compare(key) == 0 ) return obj;
-    }
-    return nullptr;
+    return findByKeyPath( key, this );
 }
 
 
@@ -167,6 +163,14 @@ JsonObjectView::JsonObjectView( const char* keyvalue_pair )
     }
 }
 
+JsonObjectView* JsonObjectView::operator[]( const char* key ) {
+    return findByKeyPath( key, m_children );
+}
+
+const JsonObjectView* JsonObjectView::operator[]( const char* key ) const {
+    return findByKeyPath( key, m_children );
+}
+
 
 const std::string JsonObjectView::toString( const unsigned int base_indent ) const {
     std::string istr;
@@ -281,13 +285,11 @@ const JsonObjectView& Json::at( const char* key ) const {
 
 
 JsonObjectView& Json::operator[]( const char* key ) {
-    // TODO: Json keypaths
-    return findKeyRef( key );
+    return *findByKeyPath( key, this );
 }
 
 const JsonObjectView& Json::operator[]( const char* key ) const {
-    // TODO: Json keypaths
-    return findKeyRef( key );
+    return *findByKeyPath( key, this );
 }
 
 Json& Json::operator<<( const JsonValue& json_value ) {

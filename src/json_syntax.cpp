@@ -1,8 +1,66 @@
 
 #include "json_syntax.hpp"
 
+#include <stdexcept>
 
 namespace jsoncpp {
+
+
+JsonObjectView* findByKeyPath( const char* key_path, JsonObjectView* jsonobj ) {
+    std::list< std::string_view >& tokens
+        = syntax::tokenize( key_path, "." );
+    if ( tokens.size() == 0 ) tokens = { key_path };
+    
+    std::string str = key_path;
+    std::size_t pos_last_dot = str.rfind( '.' );
+    std::string last_key = str;
+    if ( pos_last_dot != str.npos )
+        last_key = str.substr( pos_last_dot + 1 );
+    
+
+    try {
+        JsonObjectView* cjov = jsonobj;
+
+        for ( std::string_view key_token : tokens ) {
+            cjov = cjov->children()->findKey(key_token.data());
+            if ( cjov == nullptr ) return nullptr;
+            else if ( cjov->key() == last_key ) return cjov;
+        }
+
+        return nullptr;
+    } catch ( std::out_of_range& oor ) {
+        return nullptr;
+    }
+}
+
+
+JsonObjectView* findByKeyPath( const char* key_path, JsonListView* jsonlist ) {
+
+    std::string str = key_path;
+    std::size_t pos_first_dot = str.find_first_of( '.' );
+    std::string first_key = str;
+    if ( pos_first_dot != str.npos ) {
+        first_key = str.substr( 0, pos_first_dot - 1 );
+        std::string rest_str = str.substr( pos_first_dot + 1 );
+    
+        JsonObjectView* jov = jsonlist->findKey( first_key.c_str() );
+        if ( jov != nullptr && rest_str.size() > 0 )
+            return findByKeyPath( rest_str.c_str(), jov );
+        else if ( jov == nullptr ) {
+            jov = new JsonObjectView( first_key.c_str(), "" );
+            jsonlist->push_back( jov );
+        }
+        return jov;
+    }
+
+    return jsonlist->findKey( key_path );
+}
+
+
+JsonObjectView* findByKeyPath( const char* key_path, Json* json ) {
+    return findByKeyPath( key_path, static_cast<JsonListView*>(json) );
+}
+
 namespace syntax {
 
 
@@ -186,7 +244,7 @@ std::list< JsonObjectView* >* findJsonObjects( const std::string jsonstr ) {
 
 
 Json* findJson( const std::string jsonstr ) {
-
+    return new Json( jsonstr.c_str() );
 }
 
 } // namespace syntax
