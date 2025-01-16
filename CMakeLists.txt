@@ -5,7 +5,7 @@ project( jsoncpp LANGUAGES CXX )
 
 set( PROJECT_NAME jsoncpp )
 set( PROJECT_BRIEF "A data handling and serialization library for JSON" )
-set( PROJECT_VERSION "1.6.0" )
+set( PROJECT_VERSION "1.6.1" )
 
 set( CMAKE_C_STANDARD 23 )
 set( CMAKE_CXX_STANDARD 23 )

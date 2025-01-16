@@ -1,6 +1,6 @@
 # jsoncpp
 ##### A data handling and serialization library for JSON
-###### v1.6.0
+###### v1.6.1
 
 
 The library allows to read and write files in JavaScriptObjectNotation (`*.json`), to access the values and define them in a ObjectView model with commonly useful C++ operators (see examples below).
@@ -8,7 +8,7 @@ The library allows to read and write files in JavaScriptObjectNotation (`*.json`
 It is possible to serialize the values into the standard C/C++ types and even customly developed types or classes via inheritance.
 
 ###### TODO: documentation
-###### TODO: value reference extension
+
 
 #### How to use
 
@@ -163,6 +163,47 @@ template<>
 std::string& typeToType( const SQLQuery& sqlq );
 template<>
 std::string typeToString( const SQLQuery& sqlq );
+```
+
+##### More extended JavaScriptObjectNotation Development
+
+An extension to JSON6 in `jsoncpp` is the value's key path extension, the serializable type extension classes and functions and a more modern way to use JSON is to use key variables in value strings to look them up and shortly replace them with the real value of a json object's key/value set. Briefly one may have a `kv_ext.json`file like this
+
+```json
+{
+    "ext": "key_variables",
+    "value_set": {
+        "valueA": "A brief excerpt of a key variable's value",
+        "valueB": "The extension #ext# will extend values with #valueA#"
+    },
+    "some_string": "This was a short demo of the vv extension namespace's extension #ext#.
+        #value_set.valueB#. Thank you for using."
+}
+```
+
+and with the keys-in-values extension would now use it in C++ like this
+
+```c++
+#include <iostream>
+#include <json_objects.hpp>
+#include <json_vv.hpp>
+
+// Read the `.json` file
+jsoncpp::Json* json = jsoncpp::Json::fromFile("kv_ext.json");
+// Write all replacings in the value "some_string" and print it.
+std::cout << jsoncpp::vv::variableValue(
+    json->findKeyRef( "some_string" ).c_str(), json, true, '#'
+) << std::endl;
+// The function has the signature
+// vv::variableValue( str_value, json_values, recusive_replace, var_delim );
+```
+
+to print with the use of a complete JSON7-like document's values
+
+```console
+$> This was a short demo of the vv extension namespace's extension key_variables.
+        The extension key_variables will extend values with A brief excerpt of a key variable's 
+        value. Thank you for using.
 ```
 
 #### License
