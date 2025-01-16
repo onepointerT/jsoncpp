@@ -8,7 +8,6 @@ The library allows to read and write files in JavaScriptObjectNotation (`*.json`
 It is possible to serialize the values into the standard C/C++ types and even customly developed types or classes via inheritance.
 
 ###### TODO: documentation
-###### TODO: library types operator native c++ type
 ###### TODO: value reference extension
 
 #### How to use

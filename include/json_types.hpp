@@ -249,6 +249,9 @@ public:
     void operator>>( JT& json_type_ref) const {
         json_type_ref = *(new JT(this->key, this->value));
     }
+
+    operator JT() const { return this->m_jsontype; }
+    operator BT() const { return this->value; }
 };
 
 
