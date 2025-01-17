@@ -2,6 +2,7 @@
 ##### A data handling and serialization library for JSON
 ###### v1.6.1
 
+<p align="center"><img width="100" src="https://github.com/onepointerT/jsoncpp/blob/dev/doc/jsoncpp.png" alt="JsonC++ logo"></p>
 
 The library allows to read and write files in JavaScriptObjectNotation (`*.json`), to access the values and define them in a ObjectView model with commonly useful C++ operators (see examples below).
 
