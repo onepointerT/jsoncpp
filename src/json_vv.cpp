@@ -34,7 +34,7 @@ std::string_view* replaceVariablesInString( const char* str, const JsonListView*
     for ( const std::string_view v : vars ) {
         if ( jov == nullptr ) jov = findByKeyPath( v.data(), json_value_ref );
         else jov = findByKeyPath( v.data(), jov );
-        if ( jov == nullptr ) continue;
+        if ( jov == nullptr ) jov = &jov->children()->findKeyRef( v.data() );
 
         const size_t pos_var_start = s->find_first_of( var_delim + v.data() + var_delim );
         if ( pos_var_start == s->npos ) continue;

@@ -53,7 +53,7 @@ JsonObjectView* findByKeyPath( const char* key_path, JsonListView* jsonlist ) {
         return jov;
     }
 
-    return jsonlist->findKey( key_path );
+    return &jsonlist->findKeyRef( key_path );
 }
 
 
@@ -188,8 +188,8 @@ JsonObjectView* findJsonObject( const SerializableTextType* json ) {
 
     size_t pos_first_newline = strv.find_first_of( "\n" );
     size_t pos_first_comma = strv.find_first_of( "," );
-    size_t pos_first_brace = strv.find_first_of( "\{");
-    size_t pos_closing_brace = strv.rfind( "\}" );
+    size_t pos_first_brace = strv.find_first_of( "{");
+    size_t pos_closing_brace = strv.rfind( "}" );
     size_t pos_first_qoute = strv.find_first_of( "\"" );
     size_t pos_second_quote = strv.find_first_of( "\"", pos_first_qoute );
     if ( pos_first_brace < pos_first_qoute ) { // Expression like `"name" : {...` here
