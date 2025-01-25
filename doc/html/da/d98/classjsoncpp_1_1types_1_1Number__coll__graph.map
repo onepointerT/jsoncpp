@@ -1,0 +1,14 @@
+<map id="jsoncpp::types::Number&lt; N &gt;" name="jsoncpp::types::Number&lt; N &gt;">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,444,200,469"/>
+<area shape="rect" id="Node000002" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="18,356,187,395"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,411,105,444,100,444,100,411"/>
+<area shape="rect" id="Node000003" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="6,268,199,307"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="105,322,105,356,100,356,100,322"/>
+<area shape="rect" id="Node000004" href="$d3/db4/classjsoncpp_1_1JsonSerializableObject.html" title="This is a base class for all types that shall be serializable from and to json, e." alt="" coords="135,180,304,219"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="184,230,129,270,126,265,181,226"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="68,93,148,118"/>
+<area shape="poly" id="edge6_Node000003_Node000005" title=" " alt="" coords="106,133,101,180,101,219,104,268,98,268,96,219,96,180,101,133"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="135,126,199,178,196,182,132,130"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="45,5,170,44"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="110,60,110,93,105,93,105,60"/>
+</map>

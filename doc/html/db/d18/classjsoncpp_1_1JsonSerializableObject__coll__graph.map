@@ -1,0 +1,7 @@
+<map id="jsoncpp::JsonSerializableObject" name="jsoncpp::JsonSerializableObject">
+<area shape="rect" id="Node000001" title="This is a base class for all types that shall be serializable from and to json, e." alt="" coords="5,180,175,219"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="50,93,130,118"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,133,93,180,87,180,87,133"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="27,5,153,44"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,60,93,93,87,93,87,60"/>
+</map>

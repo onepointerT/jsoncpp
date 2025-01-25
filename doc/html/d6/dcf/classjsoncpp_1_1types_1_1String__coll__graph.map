@@ -1,0 +1,19 @@
+<map id="jsoncpp::types::String" name="jsoncpp::types::String">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,302,154,326"/>
+<area shape="rect" id="Node000002" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="80,395,260,434"/>
+<area shape="poly" id="edge9_Node000002_Node000001" title=" " alt="" coords="74,342,73,357,77,370,89,383,103,393,100,397,85,387,73,373,68,357,68,341"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,382,149,359,130,342,108,329,111,325,133,337,154,356,166,380"/>
+<area shape="rect" id="Node000003" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="178,295,371,333"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="246,346,191,397,188,393,242,342"/>
+<area shape="rect" id="Node000004" href="$d3/db4/classjsoncpp_1_1JsonSerializableObject.html" title="This is a base class for all types that shall be serializable from and to json, e." alt="" coords="190,194,359,233"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="277,248,277,294,272,294,272,248"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="146,100,226,125"/>
+<area shape="poly" id="edge6_Node000003_Node000005" title=" " alt="" coords="172,139,160,160,152,184,149,208,155,232,169,251,187,267,227,292,224,297,183,272,165,254,150,234,144,209,147,182,156,158,167,137"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="209,135,259,192,255,195,205,139"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="124,5,249,44"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="189,60,189,100,184,100,184,60"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="383,201,496,226"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="408,236,307,296,304,292,406,232"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="364,93,515,132"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="442,147,442,200,437,200,437,147"/>
+</map>

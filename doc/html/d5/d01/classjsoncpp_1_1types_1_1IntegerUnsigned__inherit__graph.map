@@ -1,0 +1,9 @@
+<map id="jsoncpp::types::IntegerUnsigned" name="jsoncpp::types::IntegerUnsigned">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,265,215,290"/>
+<area shape="rect" id="Node000002" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="25,179,195,217"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,233,113,265,107,265,107,233"/>
+<area shape="rect" id="Node000003" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="13,92,207,131"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="113,147,113,178,107,178,107,147"/>
+<area shape="rect" id="Node000004" href="$d3/db4/classjsoncpp_1_1JsonSerializableObject.html" title="This is a base class for all types that shall be serializable from and to json, e." alt="" coords="25,5,195,44"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="113,60,113,91,107,91,107,60"/>
+</map>

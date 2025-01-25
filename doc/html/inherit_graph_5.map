@@ -1,0 +1,86 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$d3/db4/classjsoncpp_1_1JsonSerializableObject.html" title="This is a base class for all types that shall be serializable from and to json, e." alt="" coords="5,645,175,684"/>
+<area shape="rect" id="Node000001" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="223,332,416,371"/>
+<area shape="poly" id="edge2_Node000000_Node000001" title=" " alt="" coords="95,629,110,575,134,508,171,439,194,408,221,380,237,369,240,373,224,384,198,411,175,442,139,510,115,576,101,631"/>
+<area shape="rect" id="Node000014" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="223,959,416,997"/>
+<area shape="poly" id="edge8_Node000000_Node000014" title=" " alt="" coords="101,699,115,753,139,819,175,887,198,918,224,945,240,956,237,960,221,949,194,921,171,890,134,821,110,754,95,700"/>
+<area shape="rect" id="Node000017" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="223,395,416,433"/>
+<area shape="poly" id="edge11_Node000000_Node000017" title=" " alt="" coords="100,630,118,587,144,537,178,486,221,443,238,432,241,436,224,447,182,490,148,540,123,590,105,632"/>
+<area shape="rect" id="Node000020" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="223,457,416,496"/>
+<area shape="poly" id="edge14_Node000000_Node000020" title=" " alt="" coords="108,631,155,567,186,534,221,505,241,494,244,499,224,510,189,538,159,571,113,634"/>
+<area shape="rect" id="Node000023" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="223,583,416,621"/>
+<area shape="poly" id="edge17_Node000000_Node000023" title=" " alt="" coords="177,638,245,619,247,624,178,643"/>
+<area shape="rect" id="Node000026" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="223,645,416,684"/>
+<area shape="poly" id="edge20_Node000000_Node000026" title=" " alt="" coords="190,662,222,662,222,667,190,667"/>
+<area shape="rect" id="Node000029" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="223,520,416,559"/>
+<area shape="poly" id="edge23_Node000000_Node000029" title=" " alt="" coords="124,633,169,599,221,568,246,557,248,562,224,572,172,604,127,637"/>
+<area shape="rect" id="Node000031" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="223,708,416,747"/>
+<area shape="poly" id="edge25_Node000000_Node000031" title=" " alt="" coords="178,686,247,705,245,710,177,691"/>
+<area shape="rect" id="Node000034" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="223,771,416,809"/>
+<area shape="poly" id="edge28_Node000000_Node000034" title=" " alt="" coords="128,692,173,725,224,756,251,768,249,772,221,760,170,729,125,696"/>
+<area shape="rect" id="Node000037" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="223,833,416,872"/>
+<area shape="poly" id="edge31_Node000000_Node000037" title=" " alt="" coords="113,696,159,758,190,791,224,818,246,830,243,835,221,823,186,794,155,762,109,699"/>
+<area shape="rect" id="Node000040" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title="This is a text&#45;serializable class that has a value reference of the type T" alt="" coords="223,896,416,935"/>
+<area shape="poly" id="edge34_Node000000_Node000040" title=" " alt="" coords="105,697,123,739,149,789,182,838,224,881,243,893,241,898,221,885,178,842,144,791,118,741,100,699"/>
+<area shape="rect" id="Node000002" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="467,256,654,308"/>
+<area shape="poly" id="edge3_Node000001_Node000002" title=" " alt="" coords="403,325,466,306,467,312,404,330"/>
+<area shape="rect" id="Node000012" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="476,332,645,371"/>
+<area shape="poly" id="edge6_Node000001_Node000012" title=" " alt="" coords="432,349,476,349,476,354,432,354"/>
+<area shape="rect" id="Node000003" href="$d2/d9f/classjsoncpp_1_1JsonSerializable.html" title=" " alt="" coords="725,163,895,201"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="645,246,656,241,680,225,704,210,732,199,734,204,707,215,683,230,659,246,647,251"/>
+<area shape="rect" id="Node000005" href="$d2/d9f/classjsoncpp_1_1JsonSerializable.html" title="The generic serializable type of this library where you can inherit from." alt="" coords="725,225,895,264"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="669,263,724,255,725,260,670,268"/>
+<area shape="rect" id="Node000013" href="$d9/d30/classjsoncpp_1_1types_1_1Object.html" title=" " alt="" coords="734,339,886,364"/>
+<area shape="poly" id="edge7_Node000012_Node000013" title=" " alt="" coords="661,349,733,349,733,354,661,354"/>
+<area shape="rect" id="Node000015" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="466,959,655,997"/>
+<area shape="poly" id="edge9_Node000014_Node000015" title=" " alt="" coords="431,975,466,975,466,981,431,981"/>
+<area shape="rect" id="Node000016" href="$d9/d00/classjsoncpp_1_1types_1_1Array.html" title=" " alt="" coords="737,966,883,990"/>
+<area shape="poly" id="edge10_Node000015_Node000016" title=" " alt="" coords="670,975,737,975,737,981,670,981"/>
+<area shape="rect" id="Node000018" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="476,395,645,433"/>
+<area shape="poly" id="edge12_Node000017_Node000018" title=" " alt="" coords="432,411,476,411,476,417,432,417"/>
+<area shape="rect" id="Node000019" href="$d0/d3f/classjsoncpp_1_1types_1_1Bool.html" title=" " alt="" coords="740,402,880,426"/>
+<area shape="poly" id="edge13_Node000018_Node000019" title=" " alt="" coords="661,411,739,411,739,417,661,417"/>
+<area shape="rect" id="Node000021" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="476,457,645,496"/>
+<area shape="poly" id="edge15_Node000020_Node000021" title=" " alt="" coords="432,474,476,474,476,479,432,479"/>
+<area shape="rect" id="Node000022" href="$d0/d1a/classjsoncpp_1_1types_1_1Double.html" title=" " alt="" coords="732,464,888,489"/>
+<area shape="poly" id="edge16_Node000021_Node000022" title=" " alt="" coords="661,474,732,474,732,479,661,479"/>
+<area shape="rect" id="Node000024" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="476,583,645,621"/>
+<area shape="poly" id="edge18_Node000023_Node000024" title=" " alt="" coords="432,599,476,599,476,605,432,605"/>
+<area shape="rect" id="Node000025" href="$dc/d30/classjsoncpp_1_1types_1_1Integer.html" title=" " alt="" coords="733,590,887,614"/>
+<area shape="poly" id="edge19_Node000024_Node000025" title=" " alt="" coords="661,599,733,599,733,605,661,605"/>
+<area shape="rect" id="Node000027" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="476,645,645,684"/>
+<area shape="poly" id="edge21_Node000026_Node000027" title=" " alt="" coords="432,662,476,662,476,667,432,667"/>
+<area shape="rect" id="Node000028" href="$d0/d1f/classjsoncpp_1_1types_1_1IntegerUnsigned.html" title=" " alt="" coords="705,652,915,677"/>
+<area shape="poly" id="edge22_Node000027_Node000028" title=" " alt="" coords="661,662,705,662,705,667,661,667"/>
+<area shape="rect" id="Node000030" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="476,520,645,559"/>
+<area shape="poly" id="edge24_Node000029_Node000030" title=" " alt="" coords="432,537,476,537,476,542,432,542"/>
+<area shape="rect" id="Node000032" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="476,708,645,747"/>
+<area shape="poly" id="edge26_Node000031_Node000032" title=" " alt="" coords="432,725,476,725,476,730,432,730"/>
+<area shape="rect" id="Node000033" href="$d9/df4/classjsoncpp_1_1types_1_1Null.html" title=" " alt="" coords="741,715,879,740"/>
+<area shape="poly" id="edge27_Node000032_Node000033" title=" " alt="" coords="661,725,741,725,741,730,661,730"/>
+<area shape="rect" id="Node000035" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="476,771,645,809"/>
+<area shape="poly" id="edge29_Node000034_Node000035" title=" " alt="" coords="432,787,476,787,476,793,432,793"/>
+<area shape="rect" id="Node000036" href="$d8/d6d/classjsoncpp_1_1types_1_1Number.html" title=" " alt="" coords="713,778,907,802"/>
+<area shape="poly" id="edge30_Node000035_Node000036" title=" " alt="" coords="661,787,712,787,712,793,661,793"/>
+<area shape="rect" id="Node000038" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="471,833,650,872"/>
+<area shape="poly" id="edge32_Node000037_Node000038" title=" " alt="" coords="432,850,471,850,471,855,432,855"/>
+<area shape="rect" id="Node000039" href="$d0/d1e/classjsoncpp_1_1types_1_1String.html" title=" " alt="" coords="736,840,884,865"/>
+<area shape="poly" id="edge33_Node000038_Node000039" title=" " alt="" coords="666,850,735,850,735,855,666,855"/>
+<area shape="rect" id="Node000010" href="$d0/d3c/classjsoncpp_1_1detail_1_1RefList.html" title=" " alt="" coords="13,191,167,229"/>
+<area shape="rect" id="Node000004" href="$d8/d4b/classjsoncpp_1_1detail_1_1RefListNamed.html" title=" " alt="" coords="484,193,638,232"/>
+<area shape="poly" id="edge35_Node000010_Node000004" title=" " alt="" coords="183,208,483,210,483,215,183,213"/>
+<area shape="rect" id="Node000007" href="$d8/d4b/classjsoncpp_1_1detail_1_1RefListNamed.html" title=" " alt="" coords="242,100,396,139"/>
+<area shape="poly" id="edge38_Node000010_Node000007" title=" " alt="" coords="154,182,267,137,269,142,156,187"/>
+<area shape="rect" id="Node000011" href="$d8/d4b/classjsoncpp_1_1detail_1_1RefListNamed.html" title="A named RefList with bivariate types inside." alt="" coords="242,248,396,287"/>
+<area shape="poly" id="edge44_Node000010_Node000011" title=" " alt="" coords="183,230,242,245,241,251,182,236"/>
+<area shape="poly" id="edge36_Node000004_Node000003" title=" " alt="" coords="653,199,725,190,725,195,654,204"/>
+<area shape="poly" id="edge37_Node000004_Node000005" title=" " alt="" coords="654,222,725,231,725,236,653,227"/>
+<area shape="rect" id="Node000008" href="$db/d3c/classjsoncpp_1_1JsonTextSerializableStruct.html" title=" " alt="" coords="464,5,657,44"/>
+<area shape="poly" id="edge39_Node000007_Node000008" title=" " alt="" coords="375,91,463,53,493,42,495,47,465,58,377,95"/>
+<area shape="rect" id="Node000006" href="$db/d3c/classjsoncpp_1_1JsonTextSerializableStruct.html" title=" " alt="" coords="464,131,657,169"/>
+<area shape="poly" id="edge41_Node000007_Node000006" title=" " alt="" coords="412,128,464,135,463,140,412,134"/>
+<area shape="rect" id="Node000009" href="$db/d3c/classjsoncpp_1_1JsonTextSerializableStruct.html" title=" " alt="" coords="464,68,657,107"/>
+<area shape="poly" id="edge43_Node000007_Node000009" title=" " alt="" coords="412,104,463,98,464,103,412,110"/>
+<area shape="poly" id="edge40_Node000008_Node000003" title=" " alt="" coords="649,48,659,53,698,78,735,107,792,160,788,164,732,111,695,83,656,58,647,53"/>
+<area shape="poly" id="edge42_Node000006_Node000005" title=" " alt="" coords="647,173,659,178,683,194,707,210,736,222,734,227,704,215,680,199,656,183,644,178"/>
+</map>

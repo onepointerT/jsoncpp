@@ -1,0 +1,18 @@
+<map id="jsoncpp::JsonSerializable&lt; T, V &gt;" name="jsoncpp::JsonSerializable&lt; T, V &gt;">
+<area shape="rect" id="Node000001" title="The generic serializable type of this library where you can inherit from." alt="" coords="705,68,875,107"/>
+<area shape="rect" id="Node000002" href="$d8/d4b/classjsoncpp_1_1detail_1_1RefListNamed.html" title=" " alt="" coords="484,5,638,44"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="649,46,717,65,716,70,648,51"/>
+<area shape="rect" id="Node000003" href="$d0/d3c/classjsoncpp_1_1detail_1_1RefList.html" title=" " alt="" coords="13,37,167,76"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="183,48,483,27,483,33,183,53"/>
+<area shape="rect" id="Node000008" href="$d8/d4b/classjsoncpp_1_1detail_1_1RefListNamed.html" title=" " alt="" coords="242,67,396,105"/>
+<area shape="poly" id="edge8_Node000008_Node000003" title=" " alt="" coords="183,66,242,73,241,79,182,71"/>
+<area shape="rect" id="Node000004" href="$d8/de3/classjsoncpp_1_1types_1_1JsonType.html" title=" " alt="" coords="467,130,654,183"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="663,123,723,105,724,110,665,128"/>
+<area shape="rect" id="Node000005" href="$d2/dcd/classjsoncpp_1_1JsonTextSerializableType.html" title=" " alt="" coords="223,137,416,176"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="432,154,467,154,467,159,432,159"/>
+<area shape="rect" id="Node000006" href="$d3/db4/classjsoncpp_1_1JsonSerializableObject.html" title="This is a base class for all types that shall be serializable from and to json, e." alt="" coords="5,137,175,176"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="190,154,222,154,222,159,190,159"/>
+<area shape="rect" id="Node000007" href="$db/d3c/classjsoncpp_1_1JsonTextSerializableStruct.html" title=" " alt="" coords="464,68,657,107"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="673,85,705,85,705,90,673,90"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="412,84,463,84,463,89,412,89"/>
+</map>

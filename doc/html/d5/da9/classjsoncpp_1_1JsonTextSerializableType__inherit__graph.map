@@ -1,0 +1,5 @@
+<map id="jsoncpp::JsonTextSerializableType&lt; T &gt;" name="jsoncpp::JsonTextSerializableType&lt; T &gt;">
+<area shape="rect" id="Node000001" title="This is a text&#45;serializable class that has a value reference of the type T" alt="" coords="5,92,199,131"/>
+<area shape="rect" id="Node000002" href="$d3/db4/classjsoncpp_1_1JsonSerializableObject.html" title="This is a base class for all types that shall be serializable from and to json, e." alt="" coords="17,5,187,44"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,60,105,91,99,91,99,60"/>
+</map>
