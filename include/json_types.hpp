@@ -16,97 +16,204 @@
 namespace jsoncpp {
 
 
+/**
+ * @brief This is a text-serializable class that has a value reference of the type `T`
+ * @tparam The type of the value of the json value's type
+ */
 template< typename T >
 class JsonTextSerializableType
     :   public JsonSerializableObject
 {
 public:
+    /** @brief A reference to `T`, the value of the json value's type */
     T& value;
 
 protected:
+    /**
+     * @brief Constructor
+     * @param keystr The name of the value as string
+     * @param valueref A reference to `T`, the value
+     */
     JsonTextSerializableType( const char* keystr, T& valueref )
         :   JsonSerializableObject( keystr )
         ,   value( valueref )
     {}
 
+    /**
+     * @brief Get the value reference as string
+     * @note Uses `typeToString<T>( value )`
+     */
     virtual const char* toString() const {
         return typeToString<T>( value );
     }
 
+    /**
+     * @brief Make a string to your value reference's type
+     * @param str The value string to transform
+     * @returns The new value of `this->value`
+     * @note Uses `stringToType<T>( str )`
+     */
     virtual T& toType( const char* str ) {
-        value = stringToType<T>( str );
-        return value;
+        this->value = stringToType<T>( str );
+        return this->value;
     }
 
 public:
+    /**
+     * @brief Convert this inherited `JsonTextSerializableType` to a `JsonValue`
+     * @returns A reference to a `JsonValue` with every value already set
+     * @note This function requires the function `typeToString<T>()`
+     */
     virtual JsonValue& toJsonValue() {
-        JsonValue* json_value = new JsonValue( key, str() );
-        return *json_value;
+        return JsonSerializableObject::toJsonValue<T>( this->value );
     };
 
+    /**
+     * @brief Convert this inherited `JsonTextSerializableType` to a `JsonValue`
+     * @returns A pointer to a `JsonValue` with every value already set
+     * @note This function requires the function `typeToString<T>()`
+     */
     virtual JsonValue* toJson() const {
-        return new JsonValue( key, str() );
+        return JsonSerializableObject::toJson<T>( this->value );
     }
 
+    /**
+     * @brief Convert the reference to a `JsonValue` to this inherited `JsonTextSerializableType`
+     * @param json_value A reference to a `JsonValue` to convert from string for the value of
+     *      the `JsonValue`
+     * @returns A reference to the value `T` which is determined by `jsonValueToType<T>(value)`
+     * @note This function requires the function `stringToType<T>()`
+     */
     virtual T& fromJsonValue( const JsonValue& json_value ) {
         this->value = JsonSerializableObject::fromJsonValue<T>( json_value );
         return this->value;
     }
 
+    /**
+     * @brief Set a json value of this instance with the streaming operator.
+     * @param json_value The value to hand the key/value pair of this object's instance to
+     */
     virtual void operator>>( JsonValue& json_value ) {
-        json_value = toJsonValue();
+        json_value = this->toJsonValue();
     }
+
+    /**
+     * @brief Set only the json value of this instance with the streaming operator.
+     * @param json_value The value to hand the value `T` of this object's instance to
+     */
     virtual void operator>>( T& json_value ) {
         json_value = this->value;
     }
 
+    /**
+     * @brief Set all values of this key/value pair instance of a json value to this instance
+     *      with the streaming operator.
+     * @param json_value The value to get the key/value pair of this object's instance from
+     * @returns A reference to this instance
+     */
     virtual JsonTextSerializableType<T>& operator<<( const JsonValue& json_value ){
-        fromJsonValue( json_value );
+        this->value = this->fromJsonValue( json_value );
         return *this;
     }
 
+    /**
+     * @brief Get the value reference as string
+     */
     virtual const std::string str() const {
-        return toString();
+        return this->toString();
     }
 
+    /**
+     * @brief Get the value reference as C-string
+     */
     virtual const char* c_str() const {
-        return toString();
+        return this->toString();
     }
 
-    template< typename R, typename P >
-    friend R assign( const P param );
+    /**
+     * @brief Get the key/value pair as string in the format `"key": "value"`
+     */
+    virtual const std::string strJson() const {
+        return "\"" + this->key + "\": \"" + this->toStringValue<T>( this->value ) + "\"";
+    }
 
+    /**
+     * @brief Assign a new value
+     * @tparam R The type returned
+     * @tparam P The type parameterized
+     * @param param The value to set
+     * @returns A reference to `this` in the first definition of the function
+     * @note This function is also used in the generic `R operator=(P)` definitions and elsewhere
+     */
+    template< typename R, typename P >
+    R assign( const P param ) {
+        this->value = typeToType< P, T >( param );
+        return *this;
+    }
+
+    /**
+     * @brief Assign a new value from another `JsonTextSerializableType<T>`
+     * @param json_tobj A reference to an instance of another `JsonTextSerializableType<T>`
+     * @returns A reference to `this`
+     */
     JsonTextSerializableType<T>& assign( const JsonTextSerializableType<T>& json_tobj ) {
         this->key = json_tobj.key;
         this->value = json_tobj.value;
         return *this;
     }
+    /**
+     * @brief Assign a new value from another `JsonValue`
+     * @param json_value A reference to an instance of a `JsonValue`
+     * @returns A reference to `this`
+     */
     JsonTextSerializableType<T>& assign( const JsonValue& json_value ) {
-        this->key = json_value.first;
-        this->value = json_value.second;
+        this->fromJsonValue( json_value );
         return *this;
     }
 
+    /**
+     * @brief Assign an value `P param` to this instance of `JsonTextSerializableType<T>` object
+     * @tparam R The returned value, typically a reference to `this` or its inheriting instance
+     * @tparam P The type to assign to this instance
+     * @param param The value `P` to assign to the value of `T&` of this instance
+     * @returns Whatever the fitting `assign< R, P >` funnction returns
+     * @note A value `P` is assignable to a class `R` with value type `T`, when it is `<P,T>` assignable.
+     */
     template< typename R, typename P >
     R operator=( const P param ) {
-        return this->assign(param);
+        return this->template assign<R, P>(param);
     }
 
+    /**
+     * @brief Assign a new value from another `JsonTextSerializableType<T>`
+     * @param json_tobj A reference to an instance of another `JsonTextSerializableType<T>`
+     * @returns Whatever the fitting `assign< R, P >` funnction returns
+     */
     JsonTextSerializableType<T>& operator=( const JsonTextSerializableType<T>& json_tobj ) {
         return this->assign( json_tobj );
     }
 
+    /**
+     * @brief Assign a new value from another `JsonValue`
+     * @param json_value A reference to an instance of a `JsonValue`
+     * @returns Whatever the fitting `assign< R, P >` funnction returns
+     */
     JsonTextSerializableType<T>& operator=( const JsonValue& json_value ) {
         return this->assign( json_value );
     }
 };
 
 
-#define JSONCPP_TYPE(cls) \
+/** @brief Advice the preprocessor to compile one object of your value `T` of `JsonTextSerializableType<T>` for you. */
+#define JSONCPP_TYPE(value_type) \
     template<> \
-    class JsonTextSerializableType<cls>; \
+    class JsonTextSerializableType<decltype(value_type)>; \
 
 
+/**
+ * @brief The `namespace types {...}` includes every built-in type and the
+ *      generic `JsonType< YourType, BaseType >` to inherit from and define.
+ */
 namespace types {
 namespace detail {
 
@@ -114,76 +221,167 @@ namespace detail {
 // value = false / null / true / object / array / number / string
 
 
+/**
+ * @brief A type that includes and inherits function for transformation of e.g.
+ *      `struct YourStruct` with `YourStruct = BT` to a json-text serializable class
+ *      `class YourJsonType` with `YourJsonType = JT` that extensible and responsibly
+ *      enables you to serialized your struct-typed classes to json and json strings/files.
+ * @example JsonType<YourType, BaseStructedType>
+ * \code
+ * struct CacaoExpression {
+    std::string_view expr_str;
+};
+
+struct ddkml_obj {
+    std::string_view var_name = "";
+    std::string sql = "";
+    CacaoExpression cacaoext;
+    std::string dstruct = "";
+};
+
+
+class DdkmlObj
+    :   public jsoncpp::types::JsonType< DdkmlObj, ddkml_obj >
+{...}; // <- Your definitions there
+\endcode
+
+    need only a few functions to be string-transformable and usable with json:
+
+\code
+    namespace jsoncpp {
+template<>
+ddkml::ddkml_obj& stringToType( const char* str );
+template<>
+const char* typeToString( const ddkml::ddkml_obj& obj );
+template<>
+ddkml::ddkml_obj& typeToType( const jsoncpp::JsonValue& json );
+template<>
+jsoncpp::JsonValue& typeToType( const ddkml::ddkml_obj& obj );
+} // namespace jsoncpp
+\endcode
+ * @note All functions you need for the inherited `JsonTextSerializableType<T>` and
+ *      its value `T& value` are described there and above. The class `JsonType<JT, BT>`
+ *      also needs (additional to the string-to-type functions the `typeToType<BT, JsonValue>`
+ *      function in both transformation directions.)
+ * @tparam JT The type of your text-serializable and json-usable class
+ * @tparam BT The base type of the struct or value a json value is to be serialized to
+ */
 template< class JT, typename BT >
 class JsonType
     :   public JsonTextSerializableType< BT >
 {
 protected:
+    /** @brief A pointer to the inheriting type's instance for return-valued operators and function */
     JT* m_jsontype;
 
 public:
+    /**
+     * @brief Constructor
+     * @param keystr The name of the value, typically quotated left of the letter ':' in json key/value strings
+     *      or the first value of a `JsonValue`
+     * @param valueref A reference to an at least instanciatd value of the type `BT`
+     * @param inheriting_type A pointer to the instance of the inheriting type for use at the return
+     *          value of operators and non-virtual functions for besser suiting into your deriving class
+     * @note This class inherits from `JsonTextSerializableType< BT >` so all serialization from and to string
+     *      and `JsonValue` will be inherited and compiled for your class.
+     */
     JsonType( const char* keystr, const BT& valueref, JT* inheriting_type  )
         :   JsonTextSerializableType< BT >( keystr, valueref )
         ,   m_jsontype( inheriting_type )
     {}
+    /**
+     * @brief Constructor
+     * @param keystr The name of the value, typically quotated left of the letter ':' in json key/value strings
+     *      or the first value of a `JsonValue`
+     * @param value A value of the type `BT` to be initialized-to-reference by the type's copy-constructor
+     * @param inheriting_type A pointer to the instance of the inheriting type for use at the return
+     *          value of operators and non-virtual functions for besser suiting into your deriving class
+     * @note This class inherits from `JsonTextSerializableType< BT >` so all serialization from and to string
+     *      and `JsonValue` will be inherited and compiled for your class.
+     */
     JsonType( const char* keystr, const BT value, JT* inheriting_type )
         :   JsonTextSerializableType< BT >( keystr, *(new BT(value)) )
         ,   m_jsontype( inheriting_type )
     {}
+    /**
+     * @brief Constructor
+     * @param keystr The name of the value, typically quotated left of the letter ':' in json key/value strings
+     *      or the first value of a `JsonValue`
+     * @param value A value of the type `BT` to be initialized-to-reference by the type's copy-constructor
+     * @param inheriting_type A pointer to the instance of the inheriting type for use at the return
+     *          value of operators and non-virtual functions for besser suiting into your deriving class
+     * @note This class inherits from `JsonTextSerializableType< BT >` so all serialization from and to string
+     *      and `JsonValue` will be inherited and compiled for your class.
+     */
     JsonType( const std::string keystr, const BT value, JT* inheriting_type )
         :   JsonTextSerializableType< BT >( keystr.c_str(), *(new BT(value))  )
         ,   m_jsontype( inheriting_type )
     {}
 
     static BT& toBaseType( const JT& json_type_value ) {
-        return typeToType< JT, BT >( json_type_value );
+        return json_type_value.toBaseType();
     }
 
     BT& toBaseType() const {
         return this->value;
     }
 
-    static JT& toJsonType( const BT& base_type_value ) {
-        return typeToType< BT, JT >( base_type_value );
-    }
-
-    static JT& toJsonType( const BT base_type_value ) {
-        BT* bt = new BT( base_type_value );
-        return toJsonType( *bt );
-    }
-
-    JT& toJsonType() const {
-        return toJsonType( this->value );
-    }
-
+    /**
+     * @brief Get the value as string
+     */
     virtual const std::string str() const {
         return JsonSerializableObject::toStringValue< BT >( toBaseType() );
     }
+    /**
+     * @brief Get the value as C-string
+     */
     virtual const char* c_str() const {
         return str().c_str();
     }
 
+    /**
+     * @brief Assign another instance's reference to this object
+     * @param json_type Another `JsonType<JT,BT>` with key and value set
+     * @returns A reference to the inheriting instance
+     */
     virtual JT& operator=( const JsonType<JT, BT>& json_type ) {
         this->key = json_type.key;
         this->value = json_type.value;
         return *(this->m_jsontype);
     }
 
-    JsonType<JT, BT>& assign( const JsonType<JT, BT>& json_type_value ) {
-        JsonType<JT, BT>* jt = new JsonType<JT, BT>( json_type_value.key, json_type_value.value );
-        return *jt;
+    /**
+     * @brief Assign another instance's reference to this object
+     * @param json_type Another `JsonType<JT,BT>` with key and value set
+     * @returns A reference to the inheriting instance
+     */
+    virtual JsonType<JT, BT>& assign( const JsonType<JT, BT>& json_type_value ) {
+        this->key = json_type_value.key;
+        this->value = json_type_value.value;
+        return *this;
     }
 
+    /**
+     * @brief Assign a new value
+     * @tparam R The type returned
+     * @tparam P The type parameterized
+     * @param param The value to set
+     * @returns A reference to `this` in the first definition of the function
+     * @note This function is also used in the generic `R operator=(P)` definitions and elsewhere
+     */
     template< typename R, typename P >
     friend R assign( const P param );
 
     template< typename R, typename P >
     BT& assign( const JT& json_type_value ) {
-        return toBaseType( json_type_value );
+        this->value = toBaseType( json_type_value );
+        return this->value;
     }
 
     template< typename R, typename P >
     BT& assign( const JsonType<JT, BT> json_type ) {
+        this->key = json_type.key;
+        this->value = json_type.value;
         return json_type.value;
     }
 
@@ -191,51 +389,49 @@ public:
     JT& assign( const JsonType<JT, BT>& json_type ) {
         this->key = json_type.key;
         this->value = json_type.value;
-        return toJsonType( json_type );
+        return *(this->m_jsontype);
     }
 
     template< typename R, typename P >
     JT& assign( const BT& base_type_value ) {
-        this->value = toJsonType( base_type_value );
-        return toJsonType();
+        this->value = base_type_value;
+        return *(this->m_jsontype);
     }
 
     template< typename R, typename P >
     JT& assign( const BT base_type_value ) {
-        this->value = toJsonType( base_type_value );
-        return toJsonType();
+        this->value = &base_type_value;
+        return *(this->m_jsontype);
     }
 
+    // Also use assignments from `JsonTextSerializableType<BT>`
     using JsonTextSerializableType< BT >::assign;
 
+    /**
+     * @brief A generic assignment operator.
+     */
     template< typename R, typename P >
     R operator=( const P param ) {
-        return this->assign(param);
+        return this->template assign<R, P>(param);
     }
+
+    // Also use assignment operators from `JsonTextSerializableType<BT>`
     using JsonTextSerializableType< BT >::operator=;
 
     JsonType<JT, BT>& operator=( JT& json_type_value ) {
-        return this->operator=<>( json_type_value );
+        return this->template assign<JsonType<JT, BT>&, JT&>( json_type_value );
     }
 
     BT& operator=( const JT& json_type_value ) {
-        return this->operator=<>( json_type_value );
+        return this->template assign<BT&, JT&>( json_type_value );
     }
-
-    /*BT& operator=( const JsonType<JT, BT> json_type ) {
-        return this->operator=<>( json_type );
-    }
-
-    JT& operator=( const JsonType<JT, BT>& json_type ) {
-        return this->operator=<>( json_type );
-    }*/
 
     JT& operator=( const BT& base_type_ref ) {
-        return this->operator=<>( base_type_ref );
+        return this->template assign<JT&, BT&>( base_type_ref );
     }
 
     JT& operator=( const BT base_type_value ) {
-        return this->operator=<>( base_type_value );
+        return this->template assign<JT&, BT>( base_type_value );
     }
 
     void operator>>( BT base_type_value ) const {
@@ -247,8 +443,12 @@ public:
     }
 
     void operator>>( JT& json_type_ref) const {
-        json_type_ref = *(new JT(this->key, this->value));
+        json_type_ref = *(new JT(this->key, this->value, this));
     }
+
+    // Also use streaming operators and set/get functions from `JsonTextSerializableType<BT>`
+    using JsonTextSerializableType< BT >::operator>>;
+    using JsonTextSerializableType< BT >::operator<<;
 
     operator JT() const { return this->m_jsontype; }
     operator BT() const { return this->value; }

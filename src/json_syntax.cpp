@@ -16,6 +16,8 @@ JsonObjectView* findByKeyPath( const char* key_path, JsonObjectView* jsonobj ) {
     std::string last_key = str;
     if ( pos_last_dot != str.npos )
         last_key = str.substr( pos_last_dot + 1 );
+    else
+        return jsonobj->children()->findKey( key_path );
     
 
     try {
@@ -23,7 +25,12 @@ JsonObjectView* findByKeyPath( const char* key_path, JsonObjectView* jsonobj ) {
 
         for ( std::string_view key_token : tokens ) {
             cjov = cjov->children()->findKey(key_token.data());
-            if ( cjov == nullptr ) return nullptr;
+            if ( cjov == nullptr ) {
+                JsonObjectView* new_cjov
+                    = new JsonObjectView( key_token.data(), "" );
+                cjov->children()->push_back( new_cjov );
+                return new_cjov;
+            }
             else if ( cjov->key() == last_key ) return cjov;
         }
 

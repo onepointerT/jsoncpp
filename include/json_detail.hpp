@@ -148,22 +148,55 @@ public:
         :   RefList< Tail... >( tail... )
         ,   value( head )
     {}
+
+
+    /**
+     * @brief Constructor
+     */
+    RefList< Head, Tail... >()
+        :   RefList< Tail... >()
+        ,   value()
+    {}
 };
 
 
+/**
+ * @brief A named `RefList` with bivariate types inside
+ * @tparam The types within this reference list, e.g. `RefListNamed<bool, std::string, int>`
+ */
 template< typename... Types >
 class RefListNamed
     :   public RefList< Types... >
 {
 protected:
+    /**
+     * @brief All named keys referencing the index of their object in the reference list
+     */
     std::map< std::string, unsigned int > idx_variables;
 
 public:
+    /** @brief The type of the index map `idx_variables` */
     typedef typename std::map< std::string, unsigned int > index_map;
+    /** @brief Get a const_iterator to the begin of `idx_variables` */
     typename index_map::const_iterator cbegin() const { return idx_variables.cbegin(); }
+    /** @brief Get a const_iterator to the end of `idx_variables` */
     typename index_map::const_iterator cend() const { return idx_variables.cend(); }
+    /** @brief Get the size of `idx_variables` */
+    size_t size() const { return idx_variables.size(); }
+    /** @brief Get the key/index pair at position `pos` of `idx_variables` */
+    const unsigned int at( const std::string pos ) const { return idx_variables.at( pos ); }
 
-    RefListNamed( Types... )
+    /** 
+     * @brief Constructor
+     * @param t The type references to add to the RefListNamed
+     */
+    RefListNamed( Types... t )
+        :   RefList< Types... >( t... )
+    {}
+    /** 
+     * @brief Constructor
+     */
+    RefListNamed<Types...>()
         :   RefList< Types... >()
     {}
 
@@ -194,6 +227,11 @@ public:
         }
     }
 
+    /**
+     * @brief Get the type of a referenced content by its key
+     * @param key The key string of the type to distinguish it's positional type
+     * @returns A `std::type_info` reference
+     */
     const std::type_info& type( const char* key ) const noexcept {
         std::any* a = new std::any( this->get(key) );
         return a->type();
@@ -226,6 +264,12 @@ public:
     }
 };
 
+
+/**
+ * @brief Create a new `RefListNamed` with the types already inside.
+ * @param names The names of the references by their json key
+ * @returns A pointer to a `RefListNamed< Types... >` with all keys already set
+ */
 template< typename... Types >
 RefListNamed< Types... >* newRefList( std::array<std::string, sizeof...(Types)> names ) {
     RefListNamed< Types... >* rln = new RefListNamed< Types... >();

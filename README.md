@@ -166,6 +166,53 @@ template<>
 std::string typeToString( const SQLQuery& sqlq );
 ```
 
+##### More easy own text-serializable and json-usable types
+
+A type that includes and inherits function for transformation of e.g.
+`struct YourStruct` with `YourStruct = BT` to a json-text serializable class
+`class YourJsonType` with `YourJsonType = JT` that extensible and responsibly
+enables you to serialized your struct-typed classes with `jsoncpp::types::JsonType<JT, BT>` to json and json strings/files.
+
+For example inheriting a `jsoncpp::types::JsonType<YourType, BaseStructedType>` for your library/program could work like below.
+
+```c++
+struct CacaoExpression {
+    std::string_view expr_str;
+};
+
+struct ddkml_obj {
+    std::string_view var_name = "";
+    std::string sql = "";
+    CacaoExpression cacaoext;
+    std::string dstruct = "";
+};
+
+#include <json_types.hpp>
+
+class DdkmlObj
+    :   public jsoncpp::types::JsonType< DdkmlObj, ddkml_obj >
+{...}; // <- Your definitions there
+```
+
+so that you need only a few functions to define to be string-transformable and usable with json:
+
+```c++
+namespace jsoncpp {
+template<>
+ddkml::ddkml_obj& stringToType( const char* str ) {...}
+template<>
+const char* typeToString( const ddkml::ddkml_obj& obj ) {...}
+template<>
+ddkml::ddkml_obj& typeToType( const jsoncpp::JsonValue& json ) {...}
+template<>
+jsoncpp::JsonValue& typeToType( const ddkml::ddkml_obj& obj ) {...}
+} // namespace jsoncpp
+```
+
+All functions you need for the inherited `JsonTextSerializableType<T>` and its value `T& value` are described there and above. The class `JsonType<JT, BT>` also needs (additional to the string-to-type functions the `typeToType<BT, JsonValue>` function in both transformation directions.)
+
+
+
 ##### More extended JavaScriptObjectNotation Development
 
 An extension to JSON6 in `jsoncpp` is the value's key path extension, the serializable type extension classes and functions and a more modern way to use JSON is to use key variables in value strings to look them up and shortly replace them with the real value of a json object's key/value set. Briefly one may have a `kv_ext.json`file like this
@@ -229,6 +276,4 @@ add_subdirectory( jsoncpp )
 ...
 target_link_libraries( yourLib jsoncpp ... )
 ```
-
-
 

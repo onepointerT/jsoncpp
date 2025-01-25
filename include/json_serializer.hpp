@@ -9,20 +9,29 @@
 namespace jsoncpp {
 
 /**
- * @brief An atomic json value
+ * @brief An atomic json value with the value's name as first attribute and the value
+ *      as second attribute.
  */
 using JsonValue = std::pair< std::string, std::string >;
 
 
 /**
  * @brief Conversion function (T -> const char*)
- * @note Please define one per own `JsonType< BT, T >`
+ * @tparam T The type to transform from
+ * @param val The value to transform to string
+ * @returns The transformed string
+ * @note Please define one per own inheriting `JsonType< BT, T >` one per own
+ *      inheriting `JsonTextSerializableType<T>`
  */
 template< typename T >
 const char* typeToString( const T& val );
 
 /**
  * @brief Conversion function. Strongly used for `JsonType< JT, BT >`
+ * @tparam ST The start type to transform from
+ * @tparam RT The return type to get from the transformation
+ * @param start_type The value type to transform to `RT`
+ * @returns A reference to `RT`, which is been transformed from `start_type`
  * @note Please define two per own `JsonType< JT, BT >`, one for each conversion direction
  */
 template< typename ST, typename RT >
@@ -30,43 +39,124 @@ RT& typeToType( const ST& start_type );
 
 /**
  * @brief Conversion function.
+ * @tparam T The type to transform to
+ * @param str The string to transform
+ * @returns A reference of `T` which is been transformed from `str`
+ * @note Please define one per own inheriting `JsonType< BT, T >` one per own
+ *      inheriting `JsonTextSerializableType<T>`
  */
 template< typename T >
 T& stringToType( const char* str );
 
+/**
+ * @brief Create a new `JsonValue` from the value reference of the type `const T`
+ * @tparam T The type to transform from
+ * @param value A value reference to set in the json value
+ * @returns A pointer to a `JsonValue` with unset key and the value `value` as string set
+ * @note Uses `typeToString<T>( value )`
+ */
 template< typename T >
-JsonValue* typeToJsonValue( const T& value );
+JsonValue* typeToJsonValue( const T& value ) {
+    return new JsonValue( "", typeToString<T>( value ) );
+}
 
+/**
+ * @brief Create a reference from the instance's value of a `JsonValue` reference
+ * @tparam T The type to transform to
+ * @param value The reference to a `JsonValue`
+ * @returns A transformed reference to `T`
+ * @note Uses `stringToType<T>( value.second.c_str() )`
+ */
 template< typename T >
-T& jsonValueToType( const JsonValue& value );
+T& jsonValueToType( const JsonValue& value ) {
+    return stringToType< T >( value.second.c_str() );
+}
 
 
+/**
+ * @brief This is a base class for all types that shall be serializable
+ *      from and to json, e. thus `Json`, `JsonObjectView` and `JsonListView`
+ */
 class JsonSerializableObject {
 public:
+    /**
+     * @brief The name of the json object's value, which is to be implemented
+     *      e.g. by `JsonTextSerializableType<T>`
+     */
     std::string key;
 
 protected:
+    /**
+     * @brief Constructor
+     * @param keystr The name of the value as string, this means the first value of the
+     *      `JsonValue` pair or the first of a `"keystr_name": "value"` string with or without comma
+     */
     JsonSerializableObject( const char* keystr );
 
+    /**
+     * @brief Convert a string to a type `T`
+     * @tparam T The type to convert to
+     * @param str The string to convert
+     * @returns A reference to `T`, the string was thus converted to `T`
+     * @note Uses `stringToType<T>( str )`
+     */
     template< typename T >
     T& toType( const char* str ) const {
         return stringToType< T >( str );
     }
 
+    /**
+     * @brief Convert a type `T` to a string
+     * @tparam T The type to convert from
+     * @param value The valued type to convert
+     * @returns A reference to `std::string`, the `T& value` was thus converted to the string
+     * @returns Uses `typeToString<T>(value)`
+     */
     template< typename T >
     std::string toStringValue( const T& value ) const {
         return typeToString< T >( value );
     }
 
-    virtual JsonValue* toJson() const {
-        return new JsonValue( key, "" );
+    /**
+     * @brief Convert this `JsonSerializableObject` to a `JsonValue`
+     * @returns A pointer to a `JsonValue` with the key already set
+     */
+    virtual JsonValue* toJson() const;
+
+    /**
+     * @brief Convert this inherited `JsonSerializableObject` to a `JsonValue`
+     * @tparam T The type to convert from
+     * @param value A reference to a value to convert to string for the value of
+     *      the `JsonValue`
+     * @returns A pointer to a `JsonValue` with every value already set
+     * @note This function requires the function `typeToString<T>()`
+     */
+    template< typename T >
+    JsonValue* toJson( const T& value ) const {
+        return new JsonValue( this->key, this->toStringValue<T>(value) );
     }
 
+    /**
+     * @brief Convert this inherited `JsonSerializableObject` to a `JsonValue`
+     * @tparam T The type to convert from
+     * @param value A reference to a value to convert to string for the value of
+     *      the `JsonValue`
+     * @returns A reference to a `JsonValue` with every value already set
+     * @note This function requires the function `typeToString<T>()`
+     */
     template< typename T >
     JsonValue& toJsonValue( const T& value ) const {
-        return std::make_pair( key, *typeToJsonValue<T>( value ) );
+        return *( new JsonValue( this->key, this->toStringValue<T>(value) ) );
     }
 
+    /**
+     * @brief Convert the reference to a `JsonValue` to this inherited `JsonSerializableObject`
+     * @tparam T The type to convert from, e.g. the `T& value` of your deriving class
+     * @param value A reference to a `JsonValue` to convert from string for the value of
+     *      the `JsonValue`
+     * @returns A reference to the value `T` which is determined by `jsonValueToType<T>(value)`
+     * @note This function requires the function `stringToType<T>()`
+     */
     template< typename T >
     T& fromJsonValue( const JsonValue& value ) {
         this->key = value.first;

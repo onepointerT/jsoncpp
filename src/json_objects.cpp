@@ -13,11 +13,14 @@ JsonListView::JsonListView()
     :   std::list< JsonObjectView* >()
 {}
 
-JsonObjectView* JsonListView::findKey( const char* key ) const {
+JsonObjectView* JsonListView::findKey( const char* key ) {
     for ( JsonObjectView* obj : *this ) {
         if ( obj->key().compare(key) == 0 ) return obj;
     }
-    return nullptr;
+    
+    JsonObjectView* jov = new JsonObjectView( key, "" );
+    push_back( jov );
+    return jov;
 }
 
 JsonObjectView& JsonListView::findKeyRef( const char* key ) {

@@ -7,7 +7,7 @@
 
 namespace jsoncpp {
 
-std::string_view variableValue( const std::string str_value, const JsonListView* json_values, const bool recusive_replace, const char var_delim ) {
+std::string_view variableValue( const std::string str_value, JsonListView* json_values, const bool recusive_replace, const char var_delim ) {
 
     std::string sv = str_value;
 
@@ -24,7 +24,7 @@ std::string_view variableValue( const std::string str_value, const JsonListView*
 namespace vv { // variable value extension
 
 
-std::string_view* replaceVariablesInString( const char* str, const JsonListView* json_value_ref, const char var_delim ) {
+std::string_view* replaceVariablesInString( const char* str, JsonListView* json_value_ref, const char var_delim ) {
 
     std::string* s = new std::string( str );
     const std::list< std::string_view >& vars
