@@ -38,9 +38,11 @@ JsonObjectView* JsonListView::operator[]( const char* key ) {
     return findByKeyPath( key, this );
 }
 
+/*
 const JsonObjectView* JsonListView::operator[]( const char* key ) const {
     return findByKeyPath( key, this );
 }
+*/
 
 
 JsonListView& JsonListView::operator<<( JsonObjectView* json_obj ) {
@@ -281,19 +283,21 @@ JsonObjectView& Json::at( const char* key ) {
     return findKeyRef( key );
 }
 
-
-const JsonObjectView& Json::at( const char* key ) const {
+/*
+JsonObjectView& Json::at( const char* key ) const {
     return findKeyRef( key );
 }
-
+*/
 
 JsonObjectView& Json::operator[]( const char* key ) {
     return *findByKeyPath( key, this );
 }
 
-const JsonObjectView& Json::operator[]( const char* key ) const {
+/*
+JsonObjectView& Json::operator[]( const char* key ) const {
     return *findByKeyPath( key, this );
 }
+*/
 
 Json& Json::operator<<( const JsonValue& json_value ) {
     *this << new JsonObjectView( json_value );

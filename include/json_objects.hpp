@@ -62,7 +62,7 @@ public:
      * @note If the item was not found, a new item is created for the key string.
      * @note You may call this operator like this: `json["root_key.sub.sub"] << "A sample string.";`.
      */
-    const JsonObjectView* operator[]( const char* key ) const;
+    //const JsonObjectView* operator[]( const char* key ) const;
 
     /**
      * @brief Add a new `JsonObjectView` to this list.
@@ -121,6 +121,8 @@ public:
     using std::list< JsonObjectView* >::empty;
     using std::list< JsonObjectView* >::clear;
 
+    using std::list< JsonObjectView* >::push_front;
+
     /**
      * @brief Get this `JsonListView` as native C++ string.
      * @param base_indent The number of prefixing spaces at the level of this `JsonListView`
@@ -162,6 +164,8 @@ protected:
      * @brief All children of this `JsonObjectView` as pointer to a `JsonListView`
      */
     JsonListView* m_children;
+
+    //friend class JsonListView;
 
 public:
     /**
@@ -422,7 +426,7 @@ public:
      * @returns A reference to a `JsonObjectView` which is referenced by `key` in this 
      *      json object.
      */
-    const JsonObjectView& at( const char* key ) const;
+    //JsonObjectView& at( const char* key ) const;
     /**
      * @brief Search this json object for a named `JsonObjectView`
      * @param key The key or name path string to search for
@@ -438,7 +442,7 @@ public:
      *      json object.
      * @note Name path are the hierarchical keys of the json objects/values separated by '.'
      */
-    const JsonObjectView& operator[]( const char* key ) const;
+    //JsonObjectView& operator[]( const char* key ) const;
 
     /**
      * @brief Add a json value to this json object

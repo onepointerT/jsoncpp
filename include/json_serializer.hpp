@@ -180,7 +180,7 @@ const char* typeToString( const bool& val ) {
 template<>
 bool& stringToType( const char* str ) {
     bool* bl = new bool(true);
-    if ( str == FALSE ) bl = new bool(false);
+    if ( strcmp(str, "false") == 0 ) bl = new bool(false);
     return *bl;
 }
 
@@ -224,7 +224,7 @@ unsigned int& stringToType( const char* str ) {
     std::string s = str;
     unsigned int result{};
     std::from_chars( s.data(), s.data() + s.size(), result );
-    unsigned int* i = new uint(result);
+    unsigned int* i = new unsigned int(result);
     return *i;
 }
 
@@ -261,7 +261,7 @@ JsonValue* typeToJsonValue( const int& value ) {
 }
 
 template<>
-JsonValue* typeToJsonValue( const uint& value ) {
+JsonValue* typeToJsonValue( const unsigned int& value ) {
     return new JsonValue( "", std::to_string( value ) );
 }
 
@@ -289,8 +289,8 @@ int& jsonValueToType( const JsonValue& value ) {
 }
 
 template<>
-uint& jsonValueToType( const JsonValue& value ) {
-    uint* ui = new uint(std::stoul( value.second.c_str() ));
+unsigned int& jsonValueToType( const JsonValue& value ) {
+    unsigned int* ui = new unsigned int(std::stoul( value.second.c_str() ));
     return *ui;
 }
 

@@ -1,6 +1,8 @@
 
 #include "json_types.hpp"
 
+#include "json_types_cmp.hpp"
+
 namespace jsoncpp {
 namespace types {
 
@@ -85,7 +87,8 @@ Array& Array::operator<<( Object& json_obj ) {
 }
 
 Array& Array::operator<<( std::list< Object >& json_obj_lst ) {
-    value.merge( json_obj_lst );
+    this->value.append_range(std::ranges::subrange{json_obj_lst.begin(), json_obj_lst.end()});
+    this->value.sort( LessObject );
     return *this;
 }
 

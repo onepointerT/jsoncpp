@@ -11,14 +11,14 @@ AnyMap::AnyMap()
 
 
 auto& AnyMap::operator[]( const char* key ) {
-    std::any* a = &this->at( key );
-    return std::any_cast<decltype(a->type())&>( a );
+    std::any* a = new std::any( &this->at( key ) );
+    return std::any_cast<decltype(a->type())&>( *a );
 }
 
 
 const auto& AnyMap::operator[]( const char* key ) const {
-    const std::any* a = &this->at( key );
-    return std::any_cast<const decltype(a->type())&>( a );
+    const std::any* a = new std::any( &this->at( key ) );
+    return std::any_cast<const decltype(a->type())&>( *a );
 }
 
 const std::vector< std::string_view > AnyMap::keys() const {

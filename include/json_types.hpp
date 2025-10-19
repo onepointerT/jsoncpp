@@ -336,7 +336,8 @@ public:
      * @brief Get the value as C-string
      */
     virtual const char* c_str() const {
-        return str().c_str();
+        std::string* s = new std::string(str().c_str());
+        return s->c_str();
     }
 
     /**
@@ -490,10 +491,10 @@ public:
 #define JSON_INTEGER(num) json::types::Integer( "Integer", num )
 
 class IntegerUnsigned
-    :   public JsonType< IntegerUnsigned, uint >
+    :   public JsonType< IntegerUnsigned, unsigned int >
 {
 public:
-    IntegerUnsigned( const std::string keystr, const uint value );
+    IntegerUnsigned( const std::string keystr, const unsigned int value );
 };
 
 #define JSON_UINTEGER(num) json::types::IntegerUnsigned( "IntegerUnsigned", num )
@@ -511,7 +512,7 @@ namespace detail {
 template< typename T >
 concept json_number = requires ( T t ) {
        typeid(T) == typeid(int)
-    || typeid(T) == typeid(uint)
+    || typeid(T) == typeid(unsigned int)
     || typeid(T) == typeid(double);
 };
 } // namespace detail
@@ -544,7 +545,7 @@ public:
     template< typename JT >
     void operator>>( IntegerUnsigned& uinteger ) {
         Number< JT >* n = this;
-        if ( typeid(JT) == typeid(uint) ) {
+        if ( typeid(JT) == typeid(unsigned int) ) {
             IntegerUnsigned* uinteger_new = new IntegerUnsigned( this->key, this->value );
             uinteger = *uinteger_new;
         }
@@ -564,7 +565,7 @@ public:
 
 
 template class Number<int>;
-template class Number<uint>;
+template class Number<unsigned int>;
 template class Number<double>;
 
 
@@ -574,7 +575,7 @@ concept json_object_type = requires ( T t ) {
        std::is_convertible< T, bool >::value
     || std::is_convertible< T, std::nullptr_t >::value
     || std::is_convertible< T, int >::value
-    || std::is_convertible< T, uint >::value
+    || std::is_convertible< T, unsigned int >::value
     || std::is_convertible< T, double >::value
     || std::is_convertible< T, std::string >::value;
 };
@@ -636,7 +637,6 @@ public:
 
     std::strong_ordering operator<=>( const Object& other );
 };
-
 
 class Array
     :   protected JsonType< Array, std::list< Object > >
@@ -728,7 +728,7 @@ types::Integer& typeToType( const types::Number<int>& start_type ) {
 }
 
 template<>
-types::IntegerUnsigned& typeToType( const types::Number<uint>& start_type ) {
+types::IntegerUnsigned& typeToType( const types::Number<unsigned int>& start_type ) {
     types::IntegerUnsigned* uinteger = new types::IntegerUnsigned( "IntegerUnsigned", start_type.value );
     return *uinteger;
 }

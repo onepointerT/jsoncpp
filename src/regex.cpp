@@ -19,7 +19,7 @@ Regex::Regex( const char* str, const FlagType flag_type )
 
 std::regex_constants::syntax_option_type Regex::type( const FlagType) const {
     return ( flag == FlagType::Multiline 
-                ? std::regex_constants::ECMAScript | std::regex_constants::multiline
+                ? std::regex_constants::ECMAScript //| std::regex_constants::multiline
                 : std::regex_constants::ECMAScript
             );
 }
