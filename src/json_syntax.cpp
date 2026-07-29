@@ -68,6 +68,26 @@ JsonObjectView* findByKeyPath( const char* key_path, Json* json ) {
     return findByKeyPath( key_path, static_cast<JsonListView*>(json) );
 }
 
+
+JsonObjectView& setKeyByPath( const char* key_path, JsonObjectView* jsonobj, const std::string value ) {
+
+    std::list< std::string_view >& tokens
+        = syntax::tokenize( key_path, "." );
+    if ( tokens.size() == 0 ) tokens = { key_path };
+
+    if ( jsonobj == nullptr ) {
+        jsonobj = new jsoncpp::JsonObjectView( tokens.front().data(), "" );
+    }
+
+    JsonObjectView& jov = *jsonobj;
+    for ( const std::string_view& sv : { tokens.front(), tokens.back() } ) {
+        jov = (jov << *new jsoncpp::JsonValue( tokens.front().data(), "" ) );
+    }
+    
+    return jov;
+}
+
+
 namespace syntax {
 
 

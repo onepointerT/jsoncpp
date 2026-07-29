@@ -38,6 +38,15 @@ JsonObjectView* findByKeyPath( const char* key_path, JsonListView* jsonlist );
  */
 JsonObjectView* findByKeyPath( const char* key_path, Json* json );
 
+/**
+ * @brief Set a `JsonObjectView` by it's key path, e.g. `root.sub1.sub2`. If the value is not there
+ *      it is created for you 
+ * @param key_path Key path, separated by dots, or single key as string
+ * @param jsonobj The pointer to a `Json` object to search in
+ * @param value The value to set
+ * @returns A pointer to a `JsonObjectView` that was thus found or created for `key_path` of `jsonobj`
+ */
+JsonObjectView& setKeyByPath( const char* key_path, JsonObjectView* jsonobj, const std::string value );
 
 /** @brief Some useful regular expressions that can be used with `Match` and `Matchall` (POSIX regexp). */
 namespace regex {

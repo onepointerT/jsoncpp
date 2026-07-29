@@ -14,8 +14,15 @@ if( UNIX )
     add_definitions( -fpermissive )
 endif()
 
+add_subdirectory( lib/inicpp )
+
+include_directories( ${PROJECT_SOURCE_DIR}/lib/inicpp/lib/libdscpp/include )
+include_directories( ${PROJECT_SOURCE_DIR}/lib/inicpp/include )
+include_directories( ${PROJECT_SOURCE_DIR}/include )
+
 file( GLOB SRCFILES src/*.cpp )
 add_library( jsoncpp STATIC ${SRCFILES} )
+target_link_libraries( jsoncpp inicpp )
 
 set( ENABLE_DOC_jsoncpp TRUE )
 if( ENABLE_DOC_jsoncpp )
