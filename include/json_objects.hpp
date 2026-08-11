@@ -18,6 +18,9 @@ namespace jsoncpp {
 class JsonObjectView;
 
 
+
+
+
 /**
  * @brief The object-view model for lists of `JsonObjectView` pointers
  */
@@ -337,6 +340,12 @@ public:
      */
     JsonObjectView& operator<<( const JsonValue* json_value );
     /**
+     * @brief Add a `JsonObjectView` to the children of this json view
+     * @param kov A pair consisting of the value's key name and an pointer to an `JsonObjectView`
+     * @returns A reference to `this`.
+     */
+    JsonObjectView& operator<<( const std::pair< std::string, JsonObjectView* > kov );
+    /**
      * @brief Add a custom type inherited from `types::JsonType< JT, BT >` to the children of this json view
      * @tparam `JT` The Json type of the own `types::JsonType< JT, BT >` text serializable json type.
      * @tparam `BT` The base type of the own `types::JsonType< JT, BT >` text serializable json type.
@@ -470,7 +479,7 @@ public:
     Json& operator<<( std::list< JsonObjectView* >& json_obj_lst );
     /**
      * @brief Add a custom json value to this json object
-     * @tparam The type of the custom json value
+     * @tparam JT The type of the custom json value
      * @param custom_json_type The reference to the json value
      * @return A reference to `this`
      * @note The custom type `JT` must be re-constructible with 
@@ -479,6 +488,19 @@ public:
     template< typename JT >
     Json& operator<<( const JT& custom_json_type ) {
         *this << new JsonObjectView( *(custom_json_type.toJson()) );
+        return *this;
+    }
+    /**
+     * @brief Add a custom json value to this json object
+     * @tparam The type of the custom json value
+     * @param custom_serializable_type The reference to the json value
+     * @returns A reference to `this`
+     * @note The custom type `BNT` must be text-serializable with the functions
+     *      `jsoncpp::typeToString<BNT>(const char*)` and `jsoncpp::stringToType<BNT>(BNT&)`
+     */
+    template< typename BNT >
+    Json& operator<<( const jsoncpp::JsonTextSerializableType<BNT>& custom_serializable_type ) {
+        *this << new JsonObjectView( custom_serializable_type.key, custom_serializable_type.strJson() );
         return *this;
     }
 

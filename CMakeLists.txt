@@ -5,24 +5,32 @@ project( jsoncpp LANGUAGES CXX )
 
 set( PROJECT_NAME jsoncpp )
 set( PROJECT_BRIEF "A data handling and serialization library for JSON" )
-set( PROJECT_VERSION "1.6.1" )
+set( PROJECT_VERSION "1.6.2" )
 
 set( CMAKE_C_STANDARD 23 )
 set( CMAKE_CXX_STANDARD 23 )
+
+option ( JSONCPP_ENABLE_INICONFIG_OBJECTS "Enable linking and building with support for json objects predefined with inifiles." OFF )
 
 if( UNIX )
     add_definitions( -fpermissive )
 endif()
 
-add_subdirectory( lib/inicpp )
+if ( JSONCPP_ENABLE_INICONFIG_OBJECTS )
+	add_subdirectory( lib/inicpp )
+	add_definitions( -DJSONCPP_ENABLE_INICONFIG=1 )
 
-include_directories( ${PROJECT_SOURCE_DIR}/lib/inicpp/lib/libdscpp/include )
-include_directories( ${PROJECT_SOURCE_DIR}/lib/inicpp/include )
+	include_directories( ${PROJECT_SOURCE_DIR}/lib/inicpp/lib/libdscpp/include )
+	include_directories( ${PROJECT_SOURCE_DIR}/lib/inicpp/include )
+endif()
+
 include_directories( ${PROJECT_SOURCE_DIR}/include )
 
 file( GLOB SRCFILES src/*.cpp )
 add_library( jsoncpp STATIC ${SRCFILES} )
-target_link_libraries( jsoncpp inicpp )
+if ( JSONCPP_ENABLE_INICONFIG_OBJECTS )
+	target_link_libraries( jsoncpp inicpp )
+endif()
 
 set( ENABLE_DOC_jsoncpp TRUE )
 if( ENABLE_DOC_jsoncpp )

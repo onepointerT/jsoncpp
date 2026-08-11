@@ -3,14 +3,19 @@
 
 #include "json_syntax.hpp"
 
+#ifdef JSONCPP_ENABLE_INICONFIG
 #include <ini.hpp>
+#endif
+
 
 namespace jsoncpp {
 
 
+#ifdef JSONCPP_ENABLE_INICONFIG
 JsonTemplate::JsonTemplate( const inicpp::IniSection& inimap_section )
     :   inicpp::IniSection( inimap_section )
 {}
+#endif
 
 
 JsonObjectView& JsonTemplate::get() const {

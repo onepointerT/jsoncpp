@@ -1,22 +1,30 @@
 
 #pragma once
 
+#include "json_definition.hpp"
 #include "json_objects.hpp"
 #include "json_syntax.hpp"
 
-#include "ini.hpp"
-
 #include <map>
 #include <string>
+
+#ifdef JSONCPP_ENABLE_INICONFIG
+namespace inicpp {
+class IniSection;
+} // namespace inicpp
+
+#include <ini.hpp>
+#endif
 
 namespace jsoncpp {
 
 
 class JsonTemplate
-    :   protected inicpp::IniSection
 {
 public:
-    JsonTemplate( const inicpp::IniSection& inimap_section );
+#ifdef JSONCPP_ENABLE_INICONFIG
+    JsonTemplate( const inicpp::IniSection* inimap_section );
+#endif
     JsonTemplate( const JsonTemplate& tmpl );
 
     JsonObjectView& get() const;

@@ -1,6 +1,8 @@
 # jsoncpp
+
 ##### A data handling and serialization library for JSON
-###### v1.6.1
+
+###### v1.6.2
 
 <p align="center"><img width="100" src="https://github.com/onepointerT/jsoncpp/blob/dev/doc/jsoncpp.png" alt="JsonC++ logo"></p>
 
@@ -10,9 +12,7 @@ It is possible to serialize the values into the standard C/C++ types and even cu
 
 ###### TODO: documentation
 
-
 #### How to use
-
 
 One might have a `ddml.json` document such like
 
@@ -78,6 +78,7 @@ $> The current 'ddml.varname4' value is: "varname4": {
   }
 $> The whole document would have the following content: 
 ```
+
 ```json
 {
     "ddml": {
@@ -211,8 +212,6 @@ jsoncpp::JsonValue& typeToType( const ddkml::ddkml_obj& obj ) {...}
 
 All functions you need for the inherited `JsonTextSerializableType<T>` and its value `T& value` are described there and above. The class `JsonType<JT, BT>` also needs (additional to the string-to-type functions the `typeToType<BT, JsonValue>` function in both transformation directions.)
 
-
-
 ##### More extended JavaScriptObjectNotation Development
 
 An extension to JSON6 in `jsoncpp` is the value's key path extension, the serializable type extension classes and functions and a more modern way to use JSON is to use key variables in value strings to look them up and shortly replace them with the real value of a json object's key/value set. Briefly one may have a `kv_ext.json`file like this
@@ -264,7 +263,6 @@ The project is licensed under the three licenses  to be read from the upper to t
 
 Copyright (c) 2025 Sebastian Lau
 
-
 #### How to compile & use it
 
 ```sh
@@ -276,4 +274,3 @@ add_subdirectory( jsoncpp )
 ...
 target_link_libraries( yourLib jsoncpp ... )
 ```
-

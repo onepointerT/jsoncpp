@@ -230,6 +230,15 @@ JsonObjectView& JsonObjectView::operator<<( const JsonValue* json_value ) {
     return *this;
 }
 
+JsonObjectView& operator<<( const std::pair< std::string, JsonObjectView* > kov ) {
+    if ( kov.second != nullptr ) {
+        JsonObjectView* jov = new JsonObjectView( *kov.second );
+        jov->key = kov.first.c_str();
+        this->m_children->push_back( jov );
+    }
+    return *this;
+}
+
 
 bool JsonObjectView::greater( const JsonObjectView& lhs, const JsonObjectView& rhs ) {
     return lhs.key() < rhs.key();
